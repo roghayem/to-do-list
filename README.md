@@ -12,7 +12,7 @@ A simple, modern, and responsive Todo List application built using HTML, CSS, an
 
 ## 🖼️ Preview
 
-![Portfolio Preview](To-Do-List-08-24-2026_10_31_AM.png) 
+![Portfolio Preview](assest/To-Do-List-08-24-2026_10_31_AM.png) 
 
 ---
 
