@@ -1,3 +1,4 @@
+
 const input = document.querySelector("#todo-input");
 const addBtn = document.querySelector("#add-btn");
 const list = document.querySelector("#todo-list");
@@ -10,283 +11,128 @@ const completedBtn = document.querySelector("#completed-btn");
 const deleteAllBtn = document.querySelector("#delete-all");
 
 
-// Get saved todos
+let save = JSON.parse(localStorage.getItem("myTask")) || [];
 
-let todos = JSON.parse(localStorage.getItem("todos")) || [];
-
-
-// Show todos
-
-function showTodos(todoArray) {
-
-  list.innerHTML = "";
-
-  todoArray.forEach((todo) => {
-
-    const li = document.createElement("li");
+redner()
 
 
-    // Completed
-
-    if (todo.completed) {
-      li.classList.add("done");
-    }
-
-
-    // Checkbox
-
-    const checkbox = document.createElement("input");
-
-    checkbox.type = "checkbox";
-
-    checkbox.checked = todo.completed;
+//saving btn
+addBtn.addEventListener("click",()=>{
+    let taskes = input.value.trim();
+    if(taskes === "")return 
+   save.push({
+    text: taskes,
+    complete: false
+});
+    localStorage.setItem("myTask" , JSON.stringify(save))
+    redner()    
+    input.value =""
+})
 
 
-    checkbox.addEventListener("change", () => {
+//main function
+function redner(items = save){
+    list.innerHTML = ""
+    items.forEach(function(item , index){
+        let li = document.createElement("li");
+        let span = document.createElement("span");
+        span.classList.add("span");
+         span.textContent = item.text;
 
-      todo.completed = checkbox.checked;
-
-      saveTodos();
-
-      showTodos(todos);
-
-    });
-
-
-    // Todo information
-
-    const info = document.createElement("div");
-
-    info.classList.add("todo-info");
-
-    info.innerHTML = `
-      <p>${todo.text}</p>
-      <small>${todo.date}</small>
-    `;
-
-
-    // Buttons
-
-    const buttons = document.createElement("div");
-
-    buttons.classList.add("todo-buttons");
-
-
-    // Edit button
-
-    const editBtn = document.createElement("button");
-
-    editBtn.textContent = "Edit";
-
-    editBtn.classList.add("edit-btn");
-
-
-    editBtn.addEventListener("click", () => {
-
-      const editInput = document.createElement("input");
-
-      editInput.value = todo.text;
-
-      editInput.classList.add("edit-input");
-
-
-      const saveBtn = document.createElement("button");
-
-      saveBtn.textContent = "Save";
-
-      saveBtn.classList.add("save-btn");
-
-
-      li.replaceChild(editInput, info);
-
-      buttons.replaceChild(saveBtn, editBtn);
-
-
-      saveBtn.addEventListener("click", () => {
-
-        if (editInput.value.trim() === "") {
-          return;
+        if(item.complete){
+            li.classList.add("done")
         }
+       
 
-        todo.text = editInput.value;
+        let deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "delete";
+        deleteBtn.classList.add("delete-btn");
 
-        saveTodos();
+        deleteBtn.addEventListener('click' ,()=>{
+            li.remove();
+            save.splice(index, 1);
+            localStorage.setItem("myTask" , JSON.stringify(save))
+            redner();
+        })
 
-        showTodos(todos);
+        let checkbox =document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.classList.add("check-box");
+        checkbox.checked = item.complete;
 
-      });
+        checkbox.addEventListener("change" ,()=>{
+            item.complete = checkbox.checked;
+            localStorage.setItem("myTask" , JSON.stringify(save))
+            redner()
+        })
 
-    });
+        let editBtn =document.createElement("button");
+        editBtn.classList.add("edit-btn");
+        editBtn.textContent = "edit btn";
 
+        editBtn.addEventListener("click",()=>{
+            let editInput = document.createElement("input");
+            editInput.classList.add("edit-input")
+            editInput.value = item.text;
+            
 
-    // Delete button
+            let saveBtn = document.createElement("button");
+            saveBtn.textContent = "save";
+            saveBtn.classList.add("save-btn")
 
-    const deleteBtn = document.createElement("button");
+            li.replaceChild(editInput , span);
+            li.replaceChild(saveBtn,editBtn);
 
-    deleteBtn.textContent = "Delete";
+            saveBtn.addEventListener("click",()=>{
+                let newText =editInput.value.trim();
+                if(newText === "")return
+                item.text = newText
+            localStorage.setItem("myTask" , JSON.stringify(save))
+            redner()
 
-    deleteBtn.classList.add("delete-btn");
+            })
+         
 
+        })
 
-    deleteBtn.addEventListener("click", () => {
-
-      todos = todos.filter((item) => item !== todo);
-
-      saveTodos();
-
-      showTodos(todos);
-
-    });
-
-
-    buttons.appendChild(editBtn);
-
-    buttons.appendChild(deleteBtn);
-
-
-    li.appendChild(checkbox);
-
-    li.appendChild(info);
-
-    li.appendChild(buttons);
-
-    list.appendChild(li);
-
-  });
-
+        li.append(checkbox,span ,editBtn,deleteBtn);
+        list.append(li);
+    })
 }
 
-
-// Add Todo
-
-addBtn.addEventListener("click", addTodo);
-
-
-function addTodo() {
-
-  if (input.value.trim() === "") {
-    return;
-  }
-
-
-  const newTodo = {
-
-    text: input.value,
-
-    completed: false,
-
-    date: new Date().toLocaleDateString()
-
-  };
-
-
-  todos.push(newTodo);
-
-  saveTodos();
-
-  showTodos(todos);
-
-  input.value = "";
-
-}
-
-
-// Add with Enter
-
-input.addEventListener("keydown", (event) => {
-
-  if (event.key === "Enter") {
-
-    addTodo();
-
-  }
-
-});
-
-
-// Search
-
-search.addEventListener("input", () => {
-
-  const searchText = search.value.toLowerCase();
-
-
-  const filteredTodos = todos.filter((todo) => {
-
-    return todo.text.toLowerCase().includes(searchText);
-
-  });
-
-
-  showTodos(filteredTodos);
-
-});
-
-
-// All
-
-allBtn.addEventListener("click", () => {
-
-  showTodos(todos);
-
-});
-
-
-// Active
-
-activeBtn.addEventListener("click", () => {
-
-  const activeTodos = todos.filter((todo) => {
-
-    return todo.completed === false;
-
-  });
-
-  showTodos(activeTodos);
-
-});
-
-
-// Completed
-
-completedBtn.addEventListener("click", () => {
-
-  const completedTodos = todos.filter((todo) => {
-
-    return todo.completed === true;
-
-  });
-
-  showTodos(completedTodos);
-
-});
-
-
-// Delete All
-
-deleteAllBtn.addEventListener("click", () => {
-
-  todos = [];
-
-  saveTodos();
-
-  showTodos(todos);
-
-});
-
-
-// Save todos
-
-function saveTodos() {
-
-  localStorage.setItem(
-    "todos",
-    JSON.stringify(todos)
-  );
-
-}
-
-
-// Show saved todos when page loads
-
-showTodos(todos);
+//search input
+search.addEventListener("input",()=>{
+    const searchText = search.value.trim();
+    const filteredTodos = save.filter((item)=>{
+        return item.text.toLowerCase().includes(searchText);
+    })
+    redner(filteredTodos)
+})
+
+//all task button
+allBtn.addEventListener("click",()=>{
+    redner(save);
+})
+//active button
+activeBtn.addEventListener("click",()=>{
+    let activeTodos =save.filter(function(item){
+        return item.complete === false
+    })
+
+    redner(activeTodos)
+})
+
+//complated button
+completedBtn.addEventListener("click",()=>{
+    let completedTodos = save.filter(function(item){
+        return item.complete === true
+    })
+    redner(completedTodos);
+})
+
+//delete all task button
+deleteAllBtn.addEventListener("click",()=>{
+    save=[];
+     localStorage.setItem("myTask" , JSON.stringify(save));
+    redner()
+})
