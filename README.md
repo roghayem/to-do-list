@@ -12,7 +12,7 @@ A simple, modern, and responsive Todo List application built using HTML, CSS, an
 
 ## 🖼️ Preview
 
-[Todo List Preview](https://github.com/roghayem/to-do-list/raw/main/assest/To-Do-List-08-24-2026_10_31_AM.png)
+![Todo List Preview](https://github.com/roghayem/to-do-list/raw/main/assest/To-Do-List-08-24-2026_10_31_AM.png)
 
 ---
 
