@@ -1,57 +1,59 @@
 # 📝 Todo List
 
-A simple, modern, and responsive Todo List application built using HTML, CSS, and JavaScript. This project allows users to manage their daily tasks by adding, completing, and removing tasks through an interactive and user-friendly interface.
+A simple, modern, and responsive Todo List application built using HTML, CSS, and JavaScript. This application allows users to manage their daily tasks by adding, completing, and deleting tasks through an interactive and user-friendly interface.
 
 ---
 
 ## 🌟 Live Demo
 
-👉 View Live Demo:https://roghayem.github.io/to-do-list/
+👉 View Live Demo: [https://roghayem.github.io/to-do-list/](https://roghayem.github.io/to-do-list/)
 
 ---
 
 ## 🖼️ Preview
 
-![Portfolio Preview](assest/To-Do-List-08-24-2026_10_31_AM.png) 
+[Todo List Preview](https://github.com/roghayem/to-do-list/raw/main/assest/To-Do-List-08-24-2026_10_31_AM.png)
 
 ---
 
 ## ✨ Features
 
-* ➕ Add new tasks
-* ✅ Mark tasks as completed
-* 🗑️ Delete tasks
-* 📱 Responsive design for desktop, tablet, and mobile devices
-* ⚡ Interactive functionality using JavaScript
-* 🎨 Clean and simple user interface
-* 📝 Easy task management
+- Add new tasks
+- Mark tasks as completed
+- Delete tasks
+- Manage daily tasks through a simple interface
+- Interactive functionality using JavaScript
+- Responsive design for different screen sizes
+- Clean and user-friendly interface
 
 ---
 
-## 🛠️ Technologies Used
+## 🛠️ Built With
 
-* HTML5
-* CSS3
-* JavaScript (ES6)
-* Flexbox
-* CSS Grid
-* Media Queries
-* DOM Manipulation
+- HTML5
+- CSS3
+- JavaScript (ES6+)
+- DOM Manipulation
+- JavaScript Events
+- CSS Flexbox & Grid
+- Media Queries
 
 ---
 
-## 🚀 How to Run Locally
+## 🚀 Getting Started
+
+To run this project locally:
 
 1. Clone the repository:
 
 ```bash
-git clone YOUR-REPOSITORY-LINK
+git clone https://github.com/roghayem/to-do-list.git
 ```
 
 2. Open the project folder:
 
 ```bash
-cd todo-list
+cd to-do-list
 ```
 
 3. Open `index.html` in your browser.
@@ -66,32 +68,33 @@ todo-list/
 ├── index.html
 ├── style.css
 ├── script.js
+├── assest/
+│   └── To-Do-List-08-24-2026_10_31_AM.png
 └── README.md
 ```
 
 ---
 
-## 🎯 Project Goals
+## 📚 What I Learned
 
-This project was created to practice and improve:
+Through this project, I practiced:
 
-* DOM Manipulation
-* JavaScript Events
-* Adding and Removing Elements
-* Responsive Web Design
-* User Interaction
-* Front-End Development Fundamentals
-
----
-
-## 📧 Contact
-
-Feel free to explore my GitHub profile and check out more of my projects.
-
-GitHub: `https://github.com/roghayem`
+- Selecting and manipulating DOM elements
+- Handling JavaScript events
+- Dynamically creating and removing HTML elements
+- Managing task completion states
+- Working with arrays and JavaScript methods
+- Building interactive web applications
+- Creating responsive layouts using CSS
 
 ---
 
-## ⭐ Support
+## 👩‍💻 Author
 
-If you like this project, consider giving it a star on GitHub.
+**Roghaye Mohammadi**
+
+- GitHub: [@roghayem](https://github.com/roghayem)
+
+---
+
+⭐ If you like this project, feel free to give it a star!
